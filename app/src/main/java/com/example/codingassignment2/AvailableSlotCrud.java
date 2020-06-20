@@ -82,8 +82,6 @@ public class AvailableSlotCrud extends AppCompatActivity {
             deleteButton = findViewById(R.id.avc_delete);
             updateButton = findViewById(R.id.avc_update);
 
-            deleteButton
-
         }
 
 
