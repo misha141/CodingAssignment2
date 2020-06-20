@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "297372174325",
+    "firebase_url": "https://codingassignment2.firebaseio.com",
+    "project_id": "codingassignment2",
+    "storage_bucket": "codingassignment2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297372174325:android:2436afb62572b256b8c2bc",
+        "android_client_info": {
+          "package_name": "com.example.codingassignment2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297372174325-ou8dm4idl8mg3odvrpsklf13ak3o1ds4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASbsS1Sve0w_hx7h5kq8oRf4KQctCG62E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297372174325-ou8dm4idl8mg3odvrpsklf13ak3o1ds4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
