@@ -9,13 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button createEvent;
+    Button createEvent,SlotListButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createEvent =(Button)findViewById(R.id.create_event);
+        SlotListButton=(Button)findViewById(R.id.slot_list_btn);
+
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -23,5 +25,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        SlotListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,AvailableSlotCrud.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
