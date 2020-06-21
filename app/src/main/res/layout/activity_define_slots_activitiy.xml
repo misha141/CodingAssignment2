@@ -4,64 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/recycler_background"
     tools:context=".DefineSlotsActivitiy">
 
     <Button
         android:id="@+id/choose_date"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:text="Choose Date"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="232dp"
+        android:background="@drawable/button_background"
+        android:text="Date"
+        android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.191"
+        app:layout_constraintHorizontal_bias="0.141"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:textColor="#ffffff"
         android:id="@+id/choose_time"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:background="@drawable/button_background"
         android:text="Choose time slot"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.217"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/choose_date"
+        app:layout_constraintHorizontal_bias="0.277"
+        app:layout_constraintStart_toStartOf="@+id/choose_date"
         app:layout_constraintTop_toBottomOf="@+id/choose_date" />
 
     <Button
-        android:onClick="saveNote"
+
         android:id="@+id/save_date_time"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="save the defined slot"
+        android:background="@drawable/button_background"
+        android:text="Save Slot"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/choose_time"
-        app:layout_constraintVertical_bias="0.297" />
+        app:layout_constraintVertical_bias="0.168" />
 
 
     <TextView
         android:id="@+id/dateView"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="232dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/recycler_background"
+        android:padding="10dp"
         android:text="date choosed"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toEndOf="@+id/choose_date"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/TimeView"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:text="time slot choosed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.342"
-        app:layout_constraintStart_toEndOf="@+id/choose_time"
+        android:background="@drawable/recycler_background"
+        android:padding="10dp"
+        android:text="Time"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/dateView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/dateView"
         app:layout_constraintTop_toBottomOf="@+id/dateView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

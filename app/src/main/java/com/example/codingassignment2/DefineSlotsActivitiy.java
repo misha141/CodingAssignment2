@@ -3,31 +3,29 @@ package com.example.codingassignment2;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class DefineSlotsActivitiy extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "MainActivity";
-
-    private static final String KEY_DATE= "Date";
-    private static final String KEY_TIME = "Time";
-
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference availableSlotref = db.collection("Available Slots");
-    private DocumentReference slotref = db.document("Available Slots/Slot details");
-
+    private DatabaseReference post;
 
 
     Button btnDatePicker, btnTimePicker,saveDateTime;
@@ -39,14 +37,49 @@ public class DefineSlotsActivitiy extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_define_slots_activitiy);
 
+        init();
+
+        btnDatePicker.setOnClickListener(this);
+        btnTimePicker.setOnClickListener(this);
+
+        saveDateTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              save();
+            }
+        });
+    }
+
+
+
+    private void init() {
         btnDatePicker = (Button) findViewById(R.id.choose_date);
         btnTimePicker = (Button) findViewById(R.id.choose_time);
         saveDateTime = (Button)findViewById(R.id.save_date_time);
         txtDate = (TextView) findViewById(R.id.dateView);
         txtTime = (TextView) findViewById(R.id.TimeView);
+        post=FirebaseDatabase.getInstance().getReference().child("Slot");
+    }
 
-        btnDatePicker.setOnClickListener(this);
-        btnTimePicker.setOnClickListener(this);
+    private void save() {
+
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("Date",txtDate.getText().toString());
+        map.put("Time",txtTime.getText().toString());
+
+        post.push()
+                .setValue(map)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.i(TAG,"OnComplete");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i(TAG,"OnFailure: "+e.toString());
+            }
+        });
     }
 
     @Override
@@ -96,15 +129,5 @@ public class DefineSlotsActivitiy extends AppCompatActivity implements View.OnCl
                     }, mHour, mMinute, false);
             timePickerDialog.show();
         }
-    }
-
-    public void saveNote(View v){
-
-        String Date = txtDate.getText().toString();
-        String time = txtTime.getText().toString();
-
-        AvailableSlotDetails slots = new AvailableSlotDetails(Date,time);
-
-        availableSlotref.add(slots);
     }
 }

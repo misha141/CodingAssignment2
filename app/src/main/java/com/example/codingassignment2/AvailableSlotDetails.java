@@ -2,33 +2,34 @@ package com.example.codingassignment2;
 
 public class AvailableSlotDetails {
 
-    private String date;
-    private String time;
+    private String Date;
+    private String Time;
 
     public AvailableSlotDetails(){
 
     }
 
-    public AvailableSlotDetails(String date, String time) {
-        this.date = date;
-        this.time = time;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+    @Override
+    public String toString() {
+        return "AvailableSlotDetails{" +
+                "Date='" + Date + '\'' +
+                ", Time='" + Time + '\'' +
+                '}';
     }
 
     public String getDate() {
-        return date;
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
     }
 
     public String getTime() {
-        return time;
+        return Time;
     }
 
-
+    public void setTime(String time) {
+        Time = time;
+    }
 }

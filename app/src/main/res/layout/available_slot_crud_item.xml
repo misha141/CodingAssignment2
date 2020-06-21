@@ -2,50 +2,46 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@drawable/recycler_background"
     android:padding="16dp"
     android:layout_height="wrap_content">
 
     <TextView
+        android:textStyle="bold"
         android:id="@+id/avc_date"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:text="Date of the appointment"
-        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:text="Date"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:textStyle="bold"
         android:id="@+id/avc_time"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Time of the appointment"
-        android:textSize="18sp"
+        android:layout_marginTop="12dp"
+        android:text="Time"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="@+id/avc_date"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/avc_date"
         app:layout_constraintTop_toBottomOf="@+id/avc_date" />
 
-    <Button
-        android:id="@+id/avc_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:text="Delete"
-        android:onClick="deleteNote"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageButton
+        android:id="@+id/delete_button"
+        android:background="@drawable/recycler_background"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/avc_date"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.51"
+        app:srcCompat="@drawable/ic_delete_black_24dp" />
 
-    <Button
-        android:id="@+id/avc_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Update"
-        app:layout_constraintEnd_toEndOf="@+id/avc_delete"
-        app:layout_constraintStart_toStartOf="@+id/avc_delete"
-        app:layout_constraintTop_toBottomOf="@+id/avc_delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

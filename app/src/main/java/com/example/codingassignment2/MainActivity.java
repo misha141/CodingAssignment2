@@ -4,12 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
+    private FirebaseAuth firebaseAuth;
     Button createEvent,SlotListButton;
+    TextView UserName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,20 +25,36 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         createEvent =(Button)findViewById(R.id.create_event);
         SlotListButton=(Button)findViewById(R.id.slot_list_btn);
+        UserName = findViewById(R.id.user_name);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,DefineSlotsActivitiy.class);
-                startActivity(intent);
+                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                if(currentUser == null){
+                    Toast.makeText(MainActivity.this, "Sorry! you need to login before Defining Slots", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this,RegisterActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(MainActivity.this, DefineSlotsActivitiy.class);
+                    startActivity(intent);
+                }
             }
         });
 
         SlotListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,AvailableSlotCrud.class);
-                startActivity(intent);
+                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                if(currentUser == null){
+                    Toast.makeText(MainActivity.this, "Sorry! you need to login before Defining Slots", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this,RegisterActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(MainActivity.this, AvailableSlotCrud.class);
+                    startActivity(intent);
+                }
             }
         });
 

@@ -1,101 +1,37 @@
 package com.example.codingassignment2;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AvailableSlotCrud extends AppCompatActivity {
 
-    private FirebaseFirestore firebaseFirestore;
-    private RecyclerView slotList;
-    private FirestoreRecyclerAdapter adapter;
-
-
-
+    private RecyclerView recyclerView;
+    private SlotAdapter adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_available_slot_crud);
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        slotList = findViewById(R.id.recyclerView);
 
-        Query query = firebaseFirestore.collection("Available Slots");
-        FirestoreRecyclerOptions<AvailableSlotDetails> options  = new FirestoreRecyclerOptions.Builder<AvailableSlotDetails>()
-                .setQuery(query,AvailableSlotDetails.class)
+        recyclerView= findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FirebaseRecyclerOptions<AvailableSlotDetails> options =
+                new FirebaseRecyclerOptions.Builder<AvailableSlotDetails>()
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("Slot"),AvailableSlotDetails.class)
                 .build();
 
-        adapter = new FirestoreRecyclerAdapter<AvailableSlotDetails, SlotViewHolder>(options) {
-            @NonNull
-            @Override
-            public SlotViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.available_slot_crud_item,parent,false);
+        adapter = new SlotAdapter(options,this);
+        recyclerView.setAdapter(adapter);
 
-                return new SlotViewHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(SlotViewHolder slotViewHolder, int i, AvailableSlotDetails availableSlotDetails) {
-                slotViewHolder.list_date.setText(availableSlotDetails.getDate());
-                slotViewHolder.list_time.setText(availableSlotDetails.getTime());
-
-
-            }
-
-
-
-        };
-        slotList.setHasFixedSize(true);
-        slotList.setLayoutManager(new LinearLayoutManager(this));
-        slotList.setAdapter(adapter);
-
-
-
-    }
-
-    private class SlotViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
-        private TextView list_date;
-        private TextView list_time;
-        Button deleteButton ;
-        Button updateButton;
-
-        public SlotViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            list_date  = itemView.findViewById(R.id.avc_date);
-            list_time = itemView.findViewById(R.id.avc_time);
-            deleteButton = findViewById(R.id.avc_delete);
-            updateButton = findViewById(R.id.avc_update);
-
-        }
-
-
-        @Override
-        public void onClick(View v) {
-
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
+       }
 
     @Override
     protected void onStart() {
@@ -103,4 +39,9 @@ public class AvailableSlotCrud extends AppCompatActivity {
         adapter.startListening();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
 }

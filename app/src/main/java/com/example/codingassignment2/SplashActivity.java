@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        SystemClock.sleep(2000);
+        SystemClock.sleep(1000);
     }
 
     @Override
