@@ -11,12 +11,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     private FirebaseAuth firebaseAuth;
+
+
     Button createEvent,SlotListButton;
     TextView UserName;
+    TextView emailId;
 
 
     @Override
@@ -26,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
         createEvent =(Button)findViewById(R.id.create_event);
         SlotListButton=(Button)findViewById(R.id.slot_list_btn);
         UserName = findViewById(R.id.user_name);
+        emailId = findViewById(R.id.user_email);
+
+        UserName.setText("Misha Kumari");
+        emailId.setText("mishasingh141");
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         createEvent.setOnClickListener(new View.OnClickListener() {
@@ -59,4 +70,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 }

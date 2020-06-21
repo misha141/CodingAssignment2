@@ -25,7 +25,7 @@ public class AvailableSlotCrud extends AppCompatActivity {
 
         FirebaseRecyclerOptions<AvailableSlotDetails> options =
                 new FirebaseRecyclerOptions.Builder<AvailableSlotDetails>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("Slot"),AvailableSlotDetails.class)
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("Slots"),AvailableSlotDetails.class)
                 .build();
 
         adapter = new SlotAdapter(options,this);

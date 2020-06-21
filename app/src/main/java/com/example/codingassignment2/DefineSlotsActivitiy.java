@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,6 +28,7 @@ public class DefineSlotsActivitiy extends AppCompatActivity implements View.OnCl
 
     private static final String TAG = "MainActivity";
     private DatabaseReference post;
+    private FirebaseAuth firebaseAuth;
 
 
     Button btnDatePicker, btnTimePicker,saveDateTime;
@@ -36,6 +39,7 @@ public class DefineSlotsActivitiy extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_define_slots_activitiy);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         init();
 
@@ -53,12 +57,13 @@ public class DefineSlotsActivitiy extends AppCompatActivity implements View.OnCl
 
 
     private void init() {
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         btnDatePicker = (Button) findViewById(R.id.choose_date);
         btnTimePicker = (Button) findViewById(R.id.choose_time);
         saveDateTime = (Button)findViewById(R.id.save_date_time);
         txtDate = (TextView) findViewById(R.id.dateView);
         txtTime = (TextView) findViewById(R.id.TimeView);
-        post=FirebaseDatabase.getInstance().getReference().child("Slot");
+        post=FirebaseDatabase.getInstance().getReference().child("Slots");
     }
 
     private void save() {
